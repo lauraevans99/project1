@@ -137,6 +137,7 @@ app.get('/profile', function (req, res) {
 });
 
 // connect to server
-app.listen(4050, function(){
+
+app.listen(process.env.PORT || 4050, function(){
 	console.log("Listening");
 });
