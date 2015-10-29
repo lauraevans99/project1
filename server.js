@@ -100,7 +100,7 @@ app.get('/profile', function (req, res) {
     	var username = currentUser.username;
     	res.render('profile', {user: username});
     } else {
-    	res.redirect('/');
+    	res.render('/');
     }
   });
 });

@@ -41,7 +41,7 @@ $(document).ready(function(){
 	        datatype: 'json',
 	        success: function (data) { 
 	        	console.log("success with ajax "); 
-	        	window.location.href = "http://localhost:4050/profile";
+	        	window.location.href = "/profile";
 	        },
 	        error: function (jqXHR, textStatus, errorThrown) { 
 	        		$("#registerPassword").val("");
@@ -67,7 +67,7 @@ $(document).ready(function(){
 	        datatype: 'json',
 	        success: function (data) { 
 	        	console.log("success with ajax " ); 
-	        	window.location.href = "http://localhost:4050/profile";
+	        	window.location.href = "/profile";
 	    	},
 	        error: function (jqXHR, textStatus, errorThrown) { 
 	        		$("#password").val("");
