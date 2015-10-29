@@ -176,7 +176,7 @@ $(document).ready(function(){
 		}, 500);
     }
 
-	$(".glyphicon-asterisk").on("click", function(e){
+	$(".glyphicon-asterisk").on("click tap", function(e){
 		e.preventDefault();
 		playC4();
 		$("#rightOrWrong").remove();
