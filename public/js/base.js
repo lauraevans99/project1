@@ -176,7 +176,21 @@ $(document).ready(function(){
 		}, 500);
     }
 
-	$(".glyphicon-asterisk").on("click tap", function(e){
+	$(".glyphicon-asterisk").on("click", function(e){
+		e.preventDefault();
+		playC4();
+		$("#rightOrWrong").remove();
+		if (arrayOfFrequencies[randomNum] === notesByKeyCode.c4.frequency) {
+			$("#mainEar").append('<a href="" class="thumbnail" id="rightOrWrong"><span class="glyphicon glyphicon-ok" /></a>');
+			earGameCounter++;
+			$("#earGameCount").html("" + earGameCounter);
+		} else {
+			$("#mainEar").append('<a href="" class="thumbnail" id="rightOrWrong"><span class="glyphicon glyphicon-remove" /></a>');
+			earGameCounter--;
+			$("#earGameCount").html("" + earGameCounter);
+		}
+	});
+	$(".glyphicon-asterisk").on("tap", function(e){
 		e.preventDefault();
 		playC4();
 		$("#rightOrWrong").remove();
