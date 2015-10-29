@@ -100,7 +100,7 @@ app.get('/profile', function (req, res) {
     	var username = currentUser.username;
     	res.render('profile', {user: username});
     } else {
-    	res.render('/');
+    	res.render('index.ejs');
     }
   });
 });
@@ -110,7 +110,7 @@ app.get('/memoryGame', function (req, res) {
   // console.log("request session data is: " + req.session.userId);
   // db.Parent.findOne({_id: req.session.userId}, function (err, currentUser) {
   //   console.log("current user: " + currentUser);
-    res.render('memoryGame.ejs');
+    res.redirect('memoryGame.ejs');
   // });
 });
 
