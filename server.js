@@ -110,7 +110,11 @@ app.get('/memoryGame', function (req, res) {
   // console.log("request session data is: " + req.session.userId);
   // db.Parent.findOne({_id: req.session.userId}, function (err, currentUser) {
   //   console.log("current user: " + currentUser);
-    res.redirect('memoryGame.ejs');
+  if(req.session.userId) {
+    res.render('memoryGame.ejs');
+  } else {
+    res.render('index.ejs');
+  }
   // });
 });
 
