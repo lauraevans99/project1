@@ -81,6 +81,46 @@ $(document).ready(function(){
 		});
 	});
 
+	// Add Child Post Form
+	$('#add-child-form').on('submit', function(e) {
+		e.preventDefault();
+		var data = $(this).serialize();
+		$.ajax(
+    	{
+	        url: '/addChild',
+	        type: 'POST',
+	        data: data,
+	        datatype: 'json',
+	        success: function (data) { 
+	        	console.log("success with ajax on child form " ); 
+	        	window.location.href = "/profile";
+	    	},
+	        error: function (jqXHR, textStatus, errorThrown) { 
+	        		console.log("error with ajax on child form " ); 
+	        		$("#password").val("");
+	        		$("#username").val("");
+	        		$('#alertDiv').append('<div class="alert alert-danger log-in-alert" role="alert">Oops! Either the user does not exist or the password is incorrect. Please try again. </div>');
+	        		window.setTimeout(function() {
+						$('.log-in-alert').alert('close');
+					}, 3000);
+    		}
+		// }).done( function(){ console.log('hello'); });
+		});
+	});
+
+	// $("#add-child-form").on("submit", function(e) {
+	// 	e.preventDefault();
+	// 	var data = $(this).serialize();
+	// 	console.log(data);
+	// 	$.post("/addChild", function (data) {
+	// 		console.log("in addChild ajax function");
+	// 		// if (err) {
+	// 			// console.log("there was an error");
+	// 		// } else {
+	// 			console.log("success sending add child form data to route");
+	// 		// }
+	// 	});
+	// });
 
 
 	// Main Game JS 
@@ -190,20 +230,7 @@ $(document).ready(function(){
 			$("#earGameCount").html("" + earGameCounter);
 		}
 	});
-	$(".glyphicon-asterisk").on("tap", function(e){
-		e.preventDefault();
-		playC4();
-		$("#rightOrWrong").remove();
-		if (arrayOfFrequencies[randomNum] === notesByKeyCode.c4.frequency) {
-			$("#mainEar").append('<a href="" class="thumbnail" id="rightOrWrong"><span class="glyphicon glyphicon-ok" /></a>');
-			earGameCounter++;
-			$("#earGameCount").html("" + earGameCounter);
-		} else {
-			$("#mainEar").append('<a href="" class="thumbnail" id="rightOrWrong"><span class="glyphicon glyphicon-remove" /></a>');
-			earGameCounter--;
-			$("#earGameCount").html("" + earGameCounter);
-		}
-	});
+
 
 	function playCsharp4() {
 		$("#main-thumbnail").empty();

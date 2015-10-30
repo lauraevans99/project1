@@ -27,7 +27,7 @@ app.use(session({
   saveUninitialized: true,
   resave: false,
   secret: 'SuperSecretCookie',
-  cookie: { maxAge: 2 * 60 * 1000 } // 30 minute cookie lifespan (in milliseconds)
+  cookie: { maxAge: 30 * 60 * 1000 } // 30 minute cookie lifespan (in milliseconds)
 }));
 
 // default action when user goes to the homepage
@@ -46,9 +46,9 @@ app.post("/register", function (req, res) {
 					res.send(err);
 				} else {
 					//res.json(parentData);
-					console.log("created parent " + req.session.userId);
           req.session.userId = user._id;
-          res.redirect('profile');
+					console.log("created parent " + req.session.userId);
+          res.render('profile');
 				}
 			});
 		} else {
@@ -119,16 +119,47 @@ app.get('/memoryGame', function (req, res) {
 });
 
 app.get('/mainGame', function (req, res) {
-	var a4 = teoria.note('a4', {value: 2});
-	res.render('mainGame.ejs');
+  if(req.session.userId) {
+    res.render('mainGame.ejs'); 
+  } else {
+    res.render('index.ejs');
+  }
 });
 
 app.get("/earGame", function (req, res) {
-  res.render("earGame.ejs");
+  if(req.session.userId) {
+    res.render("earGame.ejs"); 
+  } else {
+    res.render('index.ejs');
+  }
 });
 
 app.get("/songGame", function (req, res) {
-  res.render("songGame.ejs");
+  if(req.session.userId) {
+    res.render("songGame.ejs"); 
+  } else {
+    res.render('index.ejs');
+  }
+});
+
+app.get('/logout', function (req, res){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+  // destroy the user's session to log them out                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+  // will be re-created next request                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+  req.session.destroy(function(){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+     res.render('index.ejs');                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+  }); 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+});   
+
+app.post('/addChild', function (req, res) {
+  console.log("in the add child route " + req.name);
+  db.Kid.createKid({name: req.body.name}, {progress: "initialized"}, function (err, result) {
+    if (err) {
+      res.send(500);
+    } else if (result) {
+      console.log(req.name);
+    }
+  });
 });
 
 // connect to server

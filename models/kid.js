@@ -10,8 +10,16 @@ var kidSchema = new Schema({
 	progress: String
 });
 
+kidSchema.statics.createKid = function (name, progress, callback) {
+	var kid = this;
+	kid.create({
+		name: name,
+		progress: progress
+	});
+};
+
 // create kid model
-var Kid = mongoose.model("Kid", kidSchema);
+var Kid = mongoose.model("kid", kidSchema);
 
 // export kid model
 module.exports = Kid;
